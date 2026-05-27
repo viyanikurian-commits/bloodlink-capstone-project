@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">🩸 BloodLink</div>
+
+    <ul>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="register-container">
+
+    <form class="register-form"
+          method="POST"
+          action="/edit-profile">
+
+        <h1>✏️ Edit Profile</h1>
+
+        <p style="text-align:center; margin-bottom:25px; color:gray;">
+            Update your donor details
+        </p>
+
+        <input type="text"
+               name="full_name"
+               value="{{ user[1] }}"
+               required>
+
+        <input type="text"
+               name="phone"
+               value="{{ user[3] }}"
+               required>
+
+        <input type="text"
+               name="college_id"
+               value="{{ user[4] }}"
+               required>
+
+        <input type="text"
+               name="location"
+               value="{{ user[5] }}"
+               required>
+
+        <select name="blood_group" required>
+            <option selected>{{ user[6] }}</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+            <option>O+</option>
+            <option>O-</option>
+        </select>
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

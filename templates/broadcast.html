@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Emergency Broadcast - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">
+        🩸 BloodLink Admin
+    </div>
+
+    <ul>
+        <li><a href="/admin-dashboard">Dashboard</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+</nav>
+
+<div class="broadcast-container">
+
+    <div class="broadcast-card">
+
+        <h1>🚨 Emergency Broadcast</h1>
+
+        <p class="broadcast-subtitle">
+            Send emergency notifications to matching blood group donors
+        </p>
+
+        <form method="POST" action="/broadcast">
+
+            <label>Select Blood Group</label>
+
+            <select name="blood_group" required>
+
+                <option value="">Choose Blood Group</option>
+
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+                <option>O+</option>
+                <option>O-</option>
+
+            </select>
+
+            <label>Hospital / Location</label>
+
+            <input type="text"
+                   name="location"
+                   placeholder="Enter hospital or location"
+                   required>
+
+            <label>Emergency Contact Number</label>
+
+            <input type="text"
+                   name="phone"
+                   placeholder="Enter contact number"
+                   required>
+
+            <label>Emergency Message</label>
+
+            <textarea
+                name="message"
+                rows="6"
+                placeholder="Type emergency blood request message..."
+                required></textarea>
+
+            <button type="submit">
+
+                🚀 Send Emergency Broadcast
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

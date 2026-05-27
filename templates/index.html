@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BloodLink</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">🩸 BloodLink</div>
+
+    <ul>
+        <li><a href="/admin-login">Admin</a></li>
+    </ul>
+
+</nav>
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Donate Blood. Save Lives.</h1>
+
+        <p>
+            BloodLink connects blood donors and patients instantly during
+            emergencies inside your college community.
+        </p>
+
+        <div class="buttons">
+            <a href="/register">
+                <button class="btn-red">Register as Donor</button>
+            </a>
+
+            <a href="/login">
+                <button class="btn-white">Login</button>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="card">
+        <h2>1200+</h2>
+        <p>Registered Donors</p>
+    </div>
+
+    <div class="card">
+        <h2>850+</h2>
+        <p>Lives Saved</p>
+    </div>
+
+    <div class="card">
+        <h2>15+</h2>
+        <p>Partner Colleges</p>
+    </div>
+</section>
+
+<section class="how">
+    <h2>How BloodLink Works</h2>
+
+    <div class="steps">
+        <div class="step">
+            <h3>1</h3>
+            <p>Create Account</p>
+        </div>
+
+        <div class="step">
+            <h3>2</h3>
+            <p>Login Securely</p>
+        </div>
+
+        <div class="step">
+            <h3>3</h3>
+            <p>Send Blood Request</p>
+        </div>
+
+        <div class="step">
+            <h3>4</h3>
+            <p>Save Lives</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

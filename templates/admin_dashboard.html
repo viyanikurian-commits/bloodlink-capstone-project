@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">🩸 BloodLink Admin</div>
+
+    <ul>
+        <li><a href="/admin-dashboard">Dashboard</a></li>
+        <li><a href="/broadcast">Broadcast</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+</nav>
+
+<section class="dashboard-hero">
+
+    <h1>🛡️ Admin Dashboard</h1>
+
+    <p>
+        Monitor donors, emergency requests, and broadcast notifications.
+    </p>
+
+</section>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h2>Total Donors</h2>
+            <p>1200</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Available Donors</h2>
+            <p>850</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Emergency Requests</h2>
+            <p>42</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Total Donations</h2>
+            <p>650</p>
+        </div>
+
+    </div>
+
+    <div class="request-section">
+
+        <h2 style="margin-bottom:25px;">
+            🚨 Broadcast Requests
+        </h2>
+
+        {% if broadcasts %}
+
+        <table>
+
+            <tr>
+                <th>Blood Group</th>
+                <th>Location</th>
+                <th>Phone</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+
+            {% for b in broadcasts %}
+
+            <tr>
+                <td>{{ b[1] }}</td>
+                <td>{{ b[2] }}</td>
+                <td>{{ b[3] }}</td>
+                <td>{{ b[4] }}</td>
+                <td>{{ b[5] }}</td>
+
+                <td>
+                    <a href="/delete-broadcast/{{ b[0] }}">
+                        <button class="btn-red">
+                            Delete
+                        </button>
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+            <p>No broadcast requests found.</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

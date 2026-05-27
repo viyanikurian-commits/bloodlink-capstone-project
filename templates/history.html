@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Donation History - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">🩸 BloodLink</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/tracking">Tracking</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+</nav>
+
+<div class="dashboard-container">
+
+    <h1 style="color:#b30000; margin-bottom:30px;">
+        📜 Donation History
+    </h1>
+
+    <div class="request-section">
+
+        <table>
+
+            <tr>
+                <th>Date</th>
+                <th>Recipient</th>
+                <th>Blood Group</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>12 May 2026</td>
+                <td>Arun Joseph</td>
+                <td>O+</td>
+                <td>Kottayam</td>
+                <td class="available">
+                    Completed
+                </td>
+            </tr>
+
+            <tr>
+                <td>02 April 2026</td>
+                <td>Anu Maria</td>
+                <td>B+</td>
+                <td>Kochi</td>
+                <td class="available">
+                    Completed
+                </td>
+            </tr>
+
+            <tr>
+                <td>15 March 2026</td>
+                <td>Thomas Mathew</td>
+                <td>A+</td>
+                <td>Thrissur</td>
+                <td style="color:orange; font-weight:bold;">
+                    Pending
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">🩸 BloodLink</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/search">Find Donor</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/availability">Availability</a></li>
+        <li><a href="/tracking">Tracking</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<section class="dashboard-hero">
+
+    <h1>Welcome, {{ name }} 👋</h1>
+
+    <p>
+        Together we can save lives through quick blood donation support.
+    </p>
+
+</section>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h2>Blood Group</h2>
+            <p>{{ blood_group }}</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Availability</h2>
+
+            {% if availability == 'Available' %}
+                <p class="available">🟢 {{ availability }}</p>
+            {% else %}
+                <p class="unavailable">🔴 {{ availability }}</p>
+            {% endif %}
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Total Donations</h2>
+            <p>0</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Total Requests</h2>
+            <p>0</p>
+        </div>
+
+    </div>
+
+    {% if broadcasts %}
+
+    <div class="request-section">
+
+        <h2 style="color:#b30000; margin-bottom:25px;">
+            🚨 Emergency Broadcast Notifications
+        </h2>
+
+        <div class="dashboard-cards">
+
+            {% for alert in broadcasts %}
+
+                <div class="dashboard-card">
+
+                    <h2>Emergency Alert</h2>
+
+                    <p style="font-size:16px; font-weight:400;">
+                        {{ alert[0] }}
+                    </p>
+
+                    <small>
+                       📍 Location: {{ alert[1] }}
+<br><br>
+📞 Contact: {{ alert[2] }}}
+                    </small>
+
+                    <br><br>
+
+                    <small>
+                       🕒 {{ alert[3] }}
+                    </small>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Request Tracking - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">🩸 BloodLink</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/search">Find Donor</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="dashboard-container">
+
+    <h1 style="color:#b30000; margin-bottom:30px;">
+        📦 Blood Request Tracking
+    </h1>
+
+    <div class="request-section">
+
+        {% if requests_data %}
+
+        <table>
+            <tr>
+                <th>Request ID</th>
+                <th>Donor</th>
+                <th>Blood Group</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+
+            {% for req in requests_data %}
+            <tr>
+                <td>{{ req[0] }}</td>
+                <td>{{ req[1] }}</td>
+                <td>{{ req[2] }}</td>
+                <td>{{ req[3] }}</td>
+
+                {% if req[4] == 'Accepted' %}
+                    <td class="available">{{ req[4] }}</td>
+                {% elif req[4] == 'Declined' %}
+                    <td class="unavailable">{{ req[4] }}</td>
+                {% else %}
+                    <td style="color:orange; font-weight:bold;">{{ req[4] }}</td>
+                {% endif %}
+
+                <td>{{ req[5] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% else %}
+
+        <div class="dashboard-card">
+            <h2>No Requests Yet</h2>
+            <p style="font-size:16px; font-weight:400;">
+                Search for donors and send a blood request. Your request status will appear here.
+            </p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

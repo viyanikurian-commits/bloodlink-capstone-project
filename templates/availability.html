@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Availability - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">🩸 BloodLink</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+</nav>
+
+<div class="availability-container">
+
+    <div class="availability-card">
+
+        <h1>🩸 Donor Availability</h1>
+
+        <p style="
+            text-align:center;
+            color:gray;
+            margin-bottom:25px;
+        ">
+
+            Update your current blood donation availability
+
+        </p>
+
+        <div style="
+            text-align:center;
+            margin-bottom:30px;
+        ">
+
+            {% if status == 'Available' %}
+
+                <h2 class="available">
+                    🟢 {{ status }}
+                </h2>
+
+            {% else %}
+
+                <h2 class="unavailable">
+                    🔴 {{ status }}
+                </h2>
+
+            {% endif %}
+
+        </div>
+
+        <form method="POST">
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn-red"
+                    name="availability_status"
+                    value="Available">
+
+                    Mark Available
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-white"
+                    name="availability_status"
+                    value="Unavailable">
+
+                    Mark Unavailable
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

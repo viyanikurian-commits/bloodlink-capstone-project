@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="register-container">
+
+    <form class="register-form"
+          method="POST"
+          action="/register">
+
+        <h1>🩸 Donor Registration</h1>
+
+        <p style="text-align:center; margin-bottom:25px; color:gray;">
+            Join BloodLink and help save lives
+        </p>
+
+        <input type="text" name="full_name" placeholder="Full Name" required>
+
+        <input type="email" name="email" placeholder="Email Address" required>
+
+        <input type="text" name="phone" placeholder="Phone Number" required>
+
+        <input type="text" name="college_id" placeholder="College ID" required>
+
+        <input type="text" name="location" placeholder="Location" required>
+
+        <select name="blood_group" required>
+            <option value="">Select Blood Group</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+            <option>O+</option>
+            <option>O-</option>
+        </select>
+
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Create Account</button>
+
+        <div style="text-align:center; margin-top:20px;">
+            <a href="/login" style="color:#b30000; text-decoration:none; font-weight:600;">
+                Already have an account? Login
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

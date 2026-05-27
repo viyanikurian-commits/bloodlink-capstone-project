@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Find Donors - BloodLink</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">🩸 BloodLink</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/tracking">Tracking</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="dashboard-container">
+
+    <h1 style="color:#b30000; margin-bottom:25px;">
+        🔍 Find Blood Donors
+    </h1>
+
+    <div class="request-section">
+
+        <form class="search-box" method="POST">
+
+            <select name="blood_group" required>
+                <option value="">Select Blood Group</option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+                <option>O+</option>
+                <option>O-</option>
+            </select>
+
+            <button class="btn-red" type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="dashboard-cards">
+
+        {% if donors %}
+
+            {% for donor in donors %}
+
+                <div class="dashboard-card">
+                    <h2>{{ donor[1] }}</h2>
+
+                    <p>{{ donor[2] }}</p>
+
+                    <small>
+                        Location: {{ donor[3] }}
+                    </small>
+
+                    <br><br>
+
+                    {% if donor[4] == 'Available' %}
+
+                        <span class="available">
+                            🟢 {{ donor[4] }}
+                        </span>
+
+                        <br><br>
+
+                        <a href="/send-request/{{ donor[0] }}">
+                            <button class="btn-red">
+                                Send Request
+                            </button>
+                        </a>
+
+                    {% else %}
+
+                        <span class="unavailable">
+                            🔴 {{ donor[4] }}
+                        </span>
+
+                        <br><br>
+
+                        <button class="btn-white">
+                            Unavailable
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="dashboard-card">
+                <h2>No Donors Found</h2>
+                <p style="font-size:16px; font-weight:400;">
+                    Select a blood group to view matching donors.
+                </p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
