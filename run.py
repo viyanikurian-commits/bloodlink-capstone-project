@@ -1,16 +1,21 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
-app.secret_key = "bloodlink_secret_key"
+
+load_dotenv()
+
+app.secret_key = os.getenv("SECRET_KEY")
 
 bcrypt = Bcrypt(app)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '9539818177@Via'
-app.config['MYSQL_DB'] = 'bloodlink_db'
+app.config['MYSQL_HOST'] = os.getenv("MYSQL_HOST")
+app.config['MYSQL_USER'] = os.getenv("MYSQL_USER")
+app.config['MYSQL_PASSWORD'] = os.getenv("MYSQL_PASSWORD")
+app.config['MYSQL_DB'] = os.getenv("MYSQL_DB")
 
 mysql = MySQL(app)
 
@@ -120,14 +125,13 @@ def dashboard():
     user = cursor.fetchone()
 
     cursor.execute("""
-       SELECT message, location, phone, created_at
+        SELECT message, location, phone, created_at
         FROM broadcasts
         WHERE blood_group=%s
         ORDER BY created_at DESC
     """, (user[1],))
 
     broadcasts = cursor.fetchall()
-
     cursor.close()
 
     return render_template(
@@ -320,12 +324,10 @@ def history():
 
 @app.route("/admin-dashboard")
 def admin_dashboard():
-
     if 'admin_id' not in session:
         return redirect("/admin-login")
 
     cursor = mysql.connection.cursor()
-
     cursor.execute("""
         SELECT id, blood_group, location, phone, message, created_at
         FROM broadcasts
@@ -335,10 +337,7 @@ def admin_dashboard():
     broadcasts = cursor.fetchall()
     cursor.close()
 
-    return render_template(
-        "admin_dashboard.html",
-        broadcasts=broadcasts
-    )
+    return render_template("admin_dashboard.html", broadcasts=broadcasts)
 
 
 @app.route("/broadcast", methods=['GET', 'POST'])
@@ -347,24 +346,17 @@ def broadcast():
         return redirect("/admin-login")
 
     if request.method == 'POST':
-
         blood_group = request.form['blood_group']
         location = request.form['location']
         phone = request.form['phone']
         message = request.form['message']
 
         cursor = mysql.connection.cursor()
-
         cursor.execute("""
             INSERT INTO broadcasts
             (blood_group, location, phone, message)
             VALUES (%s, %s, %s, %s)
-        """, (
-            blood_group,
-            location,
-            phone,
-            message
-        ))
+        """, (blood_group, location, phone, message))
 
         mysql.connection.commit()
         cursor.close()
@@ -378,25 +370,14 @@ def broadcast():
 
     return render_template("broadcast.html")
 
-    
-
-@app.route("/request-popup")
-def request_popup():
-    return render_template("request_popup.html")
 
 @app.route("/delete-broadcast/<int:broadcast_id>")
 def delete_broadcast(broadcast_id):
-
     if 'admin_id' not in session:
         return redirect("/admin-login")
 
     cursor = mysql.connection.cursor()
-
-    cursor.execute(
-        "DELETE FROM broadcasts WHERE id = %s",
-        (broadcast_id,)
-    )
-
+    cursor.execute("DELETE FROM broadcasts WHERE id=%s", (broadcast_id,))
     mysql.connection.commit()
     cursor.close()
 
@@ -406,6 +387,12 @@ def delete_broadcast(broadcast_id):
         window.location.href='/admin-dashboard';
     </script>
     """
+
+
+@app.route("/request-popup")
+def request_popup():
+    return render_template("request_popup.html")
+
 
 @app.route("/logout")
 def logout():
